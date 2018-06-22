@@ -261,15 +261,15 @@
             android:id="@+id/imageButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginBottom="12dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
             android:adjustViewBounds="false"
             android:background="@android:color/transparent"
             android:cropToPadding="false"
             android:onClick="reset_b"
             android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/d_layout"
             app:srcCompat="@drawable/reset" />
 
 
@@ -287,6 +287,43 @@
             android:src="@drawable/cb"
             app:layout_constraintBottom_toBottomOf="@+id/frag_contaner"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="reset"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageButton"
+            app:layout_constraintStart_toStartOf="@+id/imageButton" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="16dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:onClick="showinfo"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/i" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Info"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="@+id/imageButton2"
+            app:layout_constraintStart_toStartOf="@+id/imageButton2" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

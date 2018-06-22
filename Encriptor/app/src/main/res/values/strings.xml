@@ -3,7 +3,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string  name = "org_text" >enter msg hear </string>
-    <string name = "mod_text">what the fuck  </string>
+    <string name="org_text">enter msg hear </string>
+    <string name="mod_text">what the fuck  </string>
+    <string name="title_activity_info">Info</string>
+
+    <string name="caesar_info">each letter in the original message (Which is cryptography is called plaintext) is replaced with a letter corresponding to a certain number of letters shifted up or down in the alphabet </string>
+
+    <string name="at_bash_info">Alphabets are reversed in order for example :\n a-z  , z->a , b->y </string>
+
+    <string name="nl_info">Alphabets are changed to their corresponding numbers for example :\n a->01 , b->02 and z->26 , abc->010203 </string>
+
+    <string name="morse_info">Morse code is a method of sending text messages by keying in a series of electronic pulses usually represented as a short pulse (called a "bot") and a long pulse (a "dash")</string>
 
 </resources>

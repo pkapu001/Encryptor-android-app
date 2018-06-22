@@ -61,7 +61,7 @@ final public class morse {
 					System.out.println("+| ");
 					temp = "| ";
 				} else {
-					temp = each;
+					temp = " " +each + " " ;
 				}
 			}
 			msg += temp;
@@ -73,7 +73,8 @@ final public class morse {
 	public static String d_morse(String code, ArrayList<morse> mkey) {
 		String[] sy;
 		String temp = "",msg="";
-		sy = code.split(" ");
+		sy = code.split("[\" \"]");
+		//sy = code.split(" ");
 		for (String each : sy) {
 			temp="";
 			if (each.equals("|")) {

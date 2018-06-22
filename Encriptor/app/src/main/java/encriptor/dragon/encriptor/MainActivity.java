@@ -5,20 +5,16 @@ import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -26,7 +22,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity implements Mod_interface,Org_interface  {
 
@@ -55,6 +50,12 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.noun_ic);
+
+
+
         setContentView(R.layout.activity_main);
 
 
@@ -65,7 +66,9 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
 
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
-        if (findViewById(R.id.frag_contaner) != null) {
+        // ADDING FRAGMENT
+         if (findViewById(R.id.frag_contaner) != null)
+         {
             if (savedInstanceState != null) {
                 return;
             }
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
            // fragmentManager.beginTransaction().replace(R.id.frag_contaner,org , null).commit();
         }
 
-
+        // TOGGLE BUTTON ACTION
         toggle = (ToggleButton) findViewById(R.id.toggleButton);
 
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -89,13 +92,6 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
                 }
             }
         });
-
-
-
-
-
-
-
 
         { /// reading morse key to program;
             {
@@ -111,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
 
             try {
                 morse.load();
-                Toast.makeText(MainActivity.this, " mkey load sucess" , Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, " mkey load sucess" , Toast.LENGTH_SHORT).show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -121,8 +117,8 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
 
 
 
-
-         radioGroup = findViewById(R.id.radioGroup);
+        /// RADIOBUTTON ACTION
+        radioGroup = findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -131,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
                 Toast.makeText(MainActivity.this,"select your choice to ->" + radioButton.getText(),Toast.LENGTH_SHORT).show();
                 LinearLayout el = (LinearLayout)findViewById(R.id.e_layout);
                 LinearLayout dl = (LinearLayout)findViewById(R.id.d_layout);
-//
+
                 if(R.id.encript_rb == checkedId){
                     el.setEnabled(true);
                     el.setVisibility(View.VISIBLE);
@@ -382,6 +378,12 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
             clipData = ClipData.newPlainText("text",org.get_orgmsg());
         }
         clipboardManager.setPrimaryClip(clipData);
+    }
+
+    public void showinfo(View view) {
+
+        Intent intent = new Intent(this,info.class);
+        startActivity(intent);
     }
     /*
     @Override
