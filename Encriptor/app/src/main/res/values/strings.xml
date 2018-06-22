@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Encryptor</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string  name = "org_text" >enter msg hear </string>
+    <string name = "mod_text">what the fuck  </string>
+
+</resources>

@@ -1,0 +1,406 @@
+package encriptor.dragon.encriptor;
+
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.zip.Inflater;
+
+public class MainActivity extends AppCompatActivity implements Mod_interface,Org_interface  {
+
+    public static FragmentManager fragmentManager;
+    public static InputStream is;
+    public ToggleButton toggle ;
+    public RadioGroup radioGroup ;
+    int key=0;
+    public static boolean notstarted=true;
+    public static String org_msg = "" , mod_msg = "";
+    public static ArrayList<morse> mkey = new ArrayList<>();
+    public static ClipboardManager clipboardManager;
+    public static ClipData clipData ;
+     Org_text org ;
+     Mod_text mod ;
+
+     Button e_c_b , d_c_b;
+    EditText ek , dk;
+
+
+
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        fragmentManager = getFragmentManager();
+          org = new Org_text();
+          mod = new Mod_text();
+
+
+        clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+        if (findViewById(R.id.frag_contaner) != null) {
+            if (savedInstanceState != null) {
+                return;
+            }
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+             //Org_frag org = new Org_frag();
+
+            fragmentTransaction.add(R.id.frag_contaner, org, null);
+            fragmentTransaction.commit();
+           // fragmentManager.beginTransaction().replace(R.id.frag_contaner,org , null).commit();
+        }
+
+
+        toggle = (ToggleButton) findViewById(R.id.toggleButton);
+
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    fragmentManager.beginTransaction().replace(R.id.frag_contaner, mod, null).commit();
+                } else {
+                    fragmentManager.beginTransaction().replace(R.id.frag_contaner, org, null).commit();
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+        { /// reading morse key to program;
+            {
+                try {
+                    is = getAssets().open("morsekey.txt");
+                    //Toast.makeText(MainActivity.this,"morse key .txt loaded",Toast.LENGTH_SHORT).show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    //Toast.makeText(MainActivity.this,"FAILED TO LOAD morse key .txt",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            try {
+                morse.load();
+                Toast.makeText(MainActivity.this, " mkey load sucess" , Toast.LENGTH_SHORT).show();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+
+
+
+         radioGroup = findViewById(R.id.radioGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                RadioButton radioButton = (RadioButton)findViewById(checkedId);
+                Toast.makeText(MainActivity.this,"select your choice to ->" + radioButton.getText(),Toast.LENGTH_SHORT).show();
+                LinearLayout el = (LinearLayout)findViewById(R.id.e_layout);
+                LinearLayout dl = (LinearLayout)findViewById(R.id.d_layout);
+//
+                if(R.id.encript_rb == checkedId){
+                    el.setEnabled(true);
+                    el.setVisibility(View.VISIBLE);
+                    dl.setEnabled(false);
+                    dl.setVisibility(View.INVISIBLE);
+                } else if(R.id.decript_rd == checkedId){
+                    el.setEnabled(false);
+                    el.setVisibility(View.INVISIBLE);
+                    dl.setEnabled(true);
+                    dl.setVisibility(View.VISIBLE);
+                }
+                else {
+                    el.setEnabled(false);
+                    el.setVisibility(View.INVISIBLE);
+                    dl.setEnabled(false);
+                    dl.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        e_c_b = findViewById(R.id.e_caesar);
+        d_c_b = findViewById(R.id.d_caesar);
+
+
+        ek = findViewById(R.id.e_c_key);
+        dk = findViewById(R.id.d_c_key);
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+    public void e_at_b(View view) {
+        if(notstarted)
+        {
+            org_msg = org.get_orgmsg();
+            mod_msg = org_msg;
+        }
+        mod_msg= encription.atbash(mod_msg);
+       // fragmentManager.beginTransaction().replace(R.id.frag_contaner, mod, null).commit();
+        if(notstarted)
+        {
+            toggle.setChecked(true);
+        }else{
+            mod.update_mod_text(mod_msg);
+        }
+
+        notstarted = false;
+
+
+    }
+
+    public void e_nl_b(View view)
+    {
+
+        if(notstarted)
+        {
+            org_msg = org.get_orgmsg();
+            mod_msg = org_msg;
+        }
+        mod_msg= encription.n_l(mod_msg);
+       // fragmentManager.beginTransaction().replace(R.id.frag_contaner, mod, null).commit();
+
+        if(notstarted)
+        {
+            toggle.setChecked(true);
+        }else{
+            mod.update_mod_text(mod_msg);
+        }
+
+        notstarted = false;
+    }
+
+    public void e_m_b(View view)
+    {
+        if(notstarted)
+        {
+            org_msg = org.get_orgmsg();
+            mod_msg = org_msg;
+        }
+        mod_msg= morse.e_morse(mod_msg,mkey);
+        if(notstarted)
+        {
+
+            toggle.setChecked(true);
+        }else{
+            mod.update_mod_text(mod_msg);
+        }
+
+        notstarted = false;
+    }
+
+    public void d_at_b(View view)
+    {
+        if(notstarted)
+        {
+            org_msg = org.get_orgmsg();
+            mod_msg = org_msg;
+        }
+        mod_msg= encription.atbash(mod_msg);
+        if(notstarted)
+        {
+            toggle.setChecked(true);
+        }else{
+            mod.update_mod_text(mod_msg);
+        }
+
+        notstarted = false;
+    }
+
+    public void d_nl_b(View view)
+    {
+        if(notstarted)
+        {
+            org_msg = org.get_orgmsg();
+            mod_msg = org_msg;
+        }
+        mod_msg= decription.n_l(mod_msg);
+        if(notstarted)
+        {
+            toggle.setChecked(true);
+        }else{
+            mod.update_mod_text(mod_msg);
+        }
+
+        notstarted = false;
+    }
+
+    public void d_m_b(View view)
+    {
+        if(notstarted)
+        {
+            org_msg = org.get_orgmsg();
+            mod_msg = org_msg;
+        }
+
+        mod_msg= morse.d_morse(mod_msg,mkey);
+        if(notstarted)
+        {
+            toggle.setChecked(true);
+        }else{
+            mod.update_mod_text(mod_msg);
+        }
+
+        notstarted = false;
+    }
+
+
+
+
+
+
+    public void e_c_b(View view) {
+        if(notstarted)
+        {
+            org_msg = org.get_orgmsg();
+            mod_msg = org_msg;
+        }
+        int temp;
+        if(!ek.getText().toString().equals("")){
+             temp = Integer.parseInt(ek.getText().toString());
+        }else{
+            ek.setText("0");
+            temp = 0;
+        }
+        key = temp;
+
+        if(key<27 && key >0  ) {
+            mod_msg = encription.ceasar(key, mod_msg);
+
+            if (notstarted) {
+                toggle.setChecked(true);
+            } else {
+                mod.update_mod_text(mod_msg);
+            }
+            notstarted = false;
+        }else{
+            Toast.makeText(MainActivity.this,"key should be between 0 and 27", Toast.LENGTH_SHORT ).show();
+        }
+
+    }
+
+    public void d_c_b(View view) {
+        if(notstarted)
+        {
+            org_msg = org.get_orgmsg();
+            mod_msg = org_msg;
+        }
+        int temp;
+        if(!ek.getText().toString().equals("")){
+            temp = Integer.parseInt(ek.getText().toString());
+        }else{
+            ek.setText("0");
+            temp = 0;
+        }
+        key = temp;
+
+        if(key<27 && key >0  ) {
+            mod_msg = decription.ceasar(key, mod_msg);
+
+            if (notstarted) {
+                toggle.setChecked(true);
+            } else {
+                mod.update_mod_text(mod_msg);
+            }
+            notstarted = false;
+        }else{
+            Toast.makeText(MainActivity.this,"key should be between 0 and 27", Toast.LENGTH_SHORT ).show();
+        }
+    }
+
+    public void reset_b(View view)
+    {
+
+
+        RadioButton rb = findViewById(R.id.encript_rb);
+
+        org.reset();
+        mod.reset();
+        org_msg="";
+        mod_msg="";
+        notstarted = true;
+        mod.update_mod_text(mod_msg);
+
+        toggle.setChecked(false);
+
+
+        org.reset();
+        ek.setText("");
+        dk.setText("");
+
+    }
+
+    public void COPY(View view) {
+        if(toggle.isChecked())
+        {
+            clipData = ClipData.newPlainText("text",mod_msg);
+
+        }else
+        {
+            clipData = ClipData.newPlainText("text",org.get_orgmsg());
+        }
+        clipboardManager.setPrimaryClip(clipData);
+    }
+    /*
+    @Override
+    public void copy_mod() {
+        //ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+
+         clipData = ClipData.newPlainText("text",mod_msg);
+        clipboardManager.setPrimaryClip(clipData);
+
+    }
+
+    @Override
+    public void copy_org() {
+        //ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+
+        clipData = ClipData.newPlainText("text",org_msg);
+        clipboardManager.setPrimaryClip(clipData);
+
+    }*/
+}
