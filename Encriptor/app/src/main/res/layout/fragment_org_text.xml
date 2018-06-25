@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+
+
+
     tools:context=".Org_text">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,7 +21,9 @@
         android:layout_height="0dp"
         android:background="@drawable/mytextbox"
         android:ems="10"
-
+        android:focusable="true"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
         android:gravity="start"
         android:hint="ENTER THE TEXT U WANT TO ENCRIPT OR DECRIPT"
         android:inputType="textMultiLine"
@@ -27,6 +35,7 @@
         android:textColor="#fff"
         android:textColorHint="#B8B8B8"
         android:textSize="14sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

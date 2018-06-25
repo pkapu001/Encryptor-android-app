@@ -1,17 +1,21 @@
 package encriptor.dragon.encriptor;
 
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 
@@ -22,7 +26,7 @@ public class Org_text extends Fragment {
 
 
     EditText editText;
-    Org_interface oc ;
+
 
     public Org_text() {
         // Required empty public constructor
@@ -38,7 +42,7 @@ public class Org_text extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        oc =(Org_interface)getActivity();
+
     }
 
     @Override
@@ -74,11 +78,38 @@ public class Org_text extends Fragment {
             }
         });*/
 
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+/*
+        ConstraintLayout cy = (ConstraintLayout)view.findViewById(R.id.ff);
+        cy.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+*/
+
+
 
 
 
 
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        MainActivity.org_msg = editText.getText().toString();
     }
 
     @Override
@@ -107,6 +138,11 @@ public class Org_text extends Fragment {
         editText.setText("");
 
     }
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
 
 
 

@@ -6,32 +6,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:focusable="true"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+
+
     tools:context=".MainActivity">
 
     <android.support.constraint.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+
+
         android:background="#000">
 
 
         <LinearLayout
             android:id="@+id/d_layout"
-            android:layout_width="172dp"
-            android:layout_height="210dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
             android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:background="#000"
+
             android:divider="@drawable/divider"
+
+
             android:dividerPadding="15dp"
+            android:minHeight="210dp"
             android:orientation="vertical"
             android:showDividers="middle"
             android:visibility="invisible"
-
-
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/e_layout"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
@@ -44,7 +58,7 @@
 
                 <EditText
                     android:id="@+id/d_c_key"
-                    android:layout_width="102dp"
+                    android:layout_width="120dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/mytextbox"
@@ -99,20 +113,21 @@
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="0dp"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="16dp"
             android:background="#000"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/d_layout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frag_contaner">
 
             <RadioButton
                 android:id="@+id/encript_rb"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
@@ -129,7 +144,7 @@
 
             <RadioButton
                 android:id="@+id/decript_rd"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
@@ -147,8 +162,9 @@
 
         <LinearLayout
             android:id="@+id/e_layout"
-            android:layout_width="172dp"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
@@ -157,7 +173,8 @@
             android:orientation="vertical"
             android:showDividers="middle"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/d_layout"
+            app:layout_constraintEnd_toStartOf="@+id/d_layout"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
@@ -168,7 +185,7 @@
 
                 <EditText
                     android:id="@+id/e_c_key"
-                    android:layout_width="102dp"
+                    android:layout_width="120dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/mytextbox"
@@ -236,7 +253,7 @@
         <FrameLayout
             android:id="@+id/frag_contaner"
             android:layout_width="0dp"
-            android:layout_height="81dp"
+            android:layout_height="95dp"
             android:layout_marginEnd="1dp"
             android:layout_marginStart="2dp"
             android:layout_marginTop="2dp"
@@ -263,13 +280,17 @@
             android:layout_height="40dp"
             android:layout_marginBottom="12dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             android:adjustViewBounds="false"
             android:background="@android:color/transparent"
             android:cropToPadding="false"
             android:onClick="reset_b"
+
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/d_layout"
+            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/reset" />
 
 
@@ -291,8 +312,8 @@
         <TextView
             android:id="@+id/textView2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_height="17dp"
+            android:layout_marginBottom="16dp"
             android:text="reset"
             android:textAlignment="center"
             android:textColor="#fff"
@@ -303,7 +324,7 @@
         <ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="0dp"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="16dp"
             android:adjustViewBounds="true"
@@ -324,6 +345,18 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="@+id/imageButton2"
             app:layout_constraintStart_toStartOf="@+id/imageButton2" />
+
+        <ImageButton
+            android:id="@+id/paste"
+            android:layout_width="75px"
+            android:layout_height="75px"
+            android:background="@android:color/transparent"
+            android:onClick="paste"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="@+id/copybutton"
+            app:layout_constraintStart_toStartOf="@+id/copybutton"
+            app:layout_constraintTop_toTopOf="@+id/frag_contaner"
+            app:srcCompat="@drawable/paste" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

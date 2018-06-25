@@ -1,14 +1,17 @@
 package encriptor.dragon.encriptor;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -122,7 +125,8 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
+                View v = findViewById(R.id.radioGroup);
+                hideKeyboard(v);
                 RadioButton radioButton = (RadioButton)findViewById(checkedId);
                 Toast.makeText(MainActivity.this,"select your choice to ->" + radioButton.getText(),Toast.LENGTH_SHORT).show();
                 LinearLayout el = (LinearLayout)findViewById(R.id.e_layout);
@@ -165,7 +169,14 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
     }
 
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Intent intent =getIntent();
+        finish();
+        startActivity(intent);
 
+    }
 
     public void e_at_b(View view) {
         if(notstarted)
@@ -349,33 +360,40 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
     public void reset_b(View view)
     {
 
+        if(!notstarted){
+            RadioButton rb = findViewById(R.id.encript_rb);
 
-        RadioButton rb = findViewById(R.id.encript_rb);
+            org.reset();
+            mod.reset();
+            org_msg="";
+            mod_msg="";
+            notstarted = true;
+            mod.update_mod_text(mod_msg);
 
-        org.reset();
-        mod.reset();
-        org_msg="";
-        mod_msg="";
-        notstarted = true;
-        mod.update_mod_text(mod_msg);
-
-        toggle.setChecked(false);
+            toggle.setChecked(false);
 
 
-        org.reset();
-        ek.setText("");
-        dk.setText("");
+            org.reset();
+            ek.setText("");
+            dk.setText("");
+        }else
+        {
+            org.reset();
+        }
 
+        Toast.makeText(MainActivity.this , "RESET SUCESSFUL" ,Toast.LENGTH_SHORT).show();
     }
 
     public void COPY(View view) {
         if(toggle.isChecked())
         {
             clipData = ClipData.newPlainText("text",mod_msg);
+            Toast.makeText(MainActivity.this , "Encrypted text copied to clipboard" ,Toast.LENGTH_SHORT).show();
 
         }else
         {
             clipData = ClipData.newPlainText("text",org.get_orgmsg());
+            Toast.makeText(MainActivity.this , "Original text copied to clipboard" ,Toast.LENGTH_SHORT).show();
         }
         clipboardManager.setPrimaryClip(clipData);
     }
@@ -385,24 +403,23 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
         Intent intent = new Intent(this,info.class);
         startActivity(intent);
     }
-    /*
-    @Override
-    public void copy_mod() {
-        //ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
 
-         clipData = ClipData.newPlainText("text",mod_msg);
-        clipboardManager.setPrimaryClip(clipData);
 
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    @Override
-    public void copy_org() {
-        //ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+    public void paste(View view) {
+        if(notstarted)
+        {
+            ClipData.Item item = clipboardManager.getPrimaryClip().getItemAt(0);
+            org.update_org_txt(item.getText().toString());
 
+        }else{
+            Toast.makeText(MainActivity.this , "cant paste after action started, please reset" ,Toast.LENGTH_LONG).show();
+        }
 
-        clipData = ClipData.newPlainText("text",org_msg);
-        clipboardManager.setPrimaryClip(clipData);
-
-    }*/
+    }
 }

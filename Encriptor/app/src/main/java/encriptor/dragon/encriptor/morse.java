@@ -13,6 +13,8 @@ final public class morse {
 	String c;
 	String symbol;
 
+
+
 	public static void load() throws FileNotFoundException {
 
 
