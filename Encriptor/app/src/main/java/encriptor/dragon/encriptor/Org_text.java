@@ -129,7 +129,7 @@ public class Org_text extends Fragment {
 
 
     public String get_orgmsg() {
-        return editText.getText().toString();
+        return editText.getText().toString().toLowerCase();
     }
 
     public  void  reset()

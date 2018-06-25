@@ -26,10 +26,13 @@ final public class morse {
 		String[] ss;
 		while (f.hasNext()) {
 			morse temp = new morse();
+			//String t="";
 			s = f.nextLine();
 
 			ss = s.split(" ");
+			//t = ss[0];
 			temp.c = ss[0];
+
 			temp.symbol = ss[1];
 			MainActivity.mkey.add(temp);
 			// System.out.println(mkey.get(i).c + mkey.get(i).symbol );
@@ -43,6 +46,7 @@ final public class morse {
 	public static String e_morse(String code, ArrayList<morse> mkey) {
 		String[] ch;
 		String temp = "", msg = "";
+		boolean space_check=true;
 
 		ch = code.split("");
 		for (String each : ch) {
@@ -50,7 +54,8 @@ final public class morse {
 			temp = "";
 			for (morse m : mkey) {
 				if (m.c.equals(each)) {
-					temp = m.symbol + " ";
+					temp = m.symbol + "   ";
+					space_check=true;
 					break;
 				}else {
 					temp="";
@@ -60,10 +65,19 @@ final public class morse {
 			if (temp == "") {
 				//System.out.println("..." + each + "..." + each.equals(" "));
 				if (each.equals(" ")) {
-					System.out.println("+| ");
-					temp = "| ";
-				} else {
-					temp = " " +each + " " ;
+					//System.out.println("+| ");
+					if(space_check)
+					{
+						temp = "| ";
+						space_check=false;
+					}
+
+				} else if(each.equals("\n")) {
+					space_check=true;
+					temp =  each + " | " ;
+				}else{
+					temp =" " + each + " ";
+					space_check=true;
 				}
 			}
 			msg += temp;
@@ -74,24 +88,41 @@ final public class morse {
 
 	public static String d_morse(String code, ArrayList<morse> mkey) {
 		String[] sy;
-		String temp = "",msg="";
+		boolean space_check=true;
+		String temp = "" ,msg="";
 		sy = code.split("[\" \"]");
 		//sy = code.split(" ");
 		for (String each : sy) {
 			temp="";
+
+
 			if (each.equals("|")) {
-				temp = " ";
+				if(space_check)
+				{
+					temp = " ";
+					space_check=false;
+				}
+
 			} else {
 				for (morse m : mkey) {
 					if (m.symbol.equals(each)) {
 						temp = m.c;
+						space_check=true;
 						break;
 					}
 
 				}
 				if(temp=="")
 				{
+                    if(each.equals("\n"))
+                    {
+                        space_check = false;
+                    }else{
+                        space_check=true;
+                    }
+
 					temp=each;
+
 				}
 			}
 			msg += temp;

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
     public static InputStream is;
     public ToggleButton toggle ;
     public RadioGroup radioGroup ;
-    int key=0;
+
     public static boolean notstarted=true;
     public static String org_msg = "" , mod_msg = "";
     public static ArrayList<morse> mkey = new ArrayList<>();
@@ -299,6 +299,7 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
 
 
     public void e_c_b(View view) {
+        int key=0;
         if(notstarted)
         {
             org_msg = org.get_orgmsg();
@@ -329,19 +330,24 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
     }
 
     public void d_c_b(View view) {
+        int key=0;
         if(notstarted)
         {
             org_msg = org.get_orgmsg();
             mod_msg = org_msg;
         }
         int temp;
-        if(!ek.getText().toString().equals("")){
-            temp = Integer.parseInt(ek.getText().toString());
+        if(!dk.getText().toString().equals("")){
+            temp = Integer.parseInt(dk.getText().toString());
+            //Toast.makeText(MainActivity.this,"key = " + temp , Toast.LENGTH_SHORT ).show();
+
         }else{
-            ek.setText("0");
+            dk.setText("0");
             temp = 0;
         }
+
         key = temp;
+       // Toast.makeText(MainActivity.this,"key = " +key, Toast.LENGTH_SHORT ).show();
 
         if(key<27 && key >0  ) {
             mod_msg = decription.ceasar(key, mod_msg);
