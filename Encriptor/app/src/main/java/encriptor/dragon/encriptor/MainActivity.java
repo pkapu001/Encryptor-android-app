@@ -524,7 +524,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             case R.id.home:
             {
-                Toast.makeText(MainActivity.this , "this is home" ,Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
 
                 break;
             }
@@ -550,6 +551,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 break;
             }
+            case R.id.info1:
+            {
+                Intent intent = new Intent(this,info.class);
+                startActivity(intent);
+                break;
+            }
+
+
+
+
         }
         return false;
     }

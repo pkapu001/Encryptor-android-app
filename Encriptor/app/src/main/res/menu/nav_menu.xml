@@ -35,4 +35,11 @@
         android:checked="false"
         />
 
+    <item
+        android:title="Info"
+        android:id="@+id/info1"
+        android:icon="@drawable/i"
+        android:checked="false"
+        />
+
 </menu>
