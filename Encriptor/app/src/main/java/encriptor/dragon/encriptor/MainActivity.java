@@ -7,11 +7,14 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -30,27 +33,32 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements Mod_interface,Org_interface  {
 
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle mtogle;
+
     public static FragmentManager fragmentManager;
     public static InputStream is;
     public ToggleButton toggle ;
     public RadioGroup radioGroup ;
-
     public static boolean notstarted=true;
     public static String org_msg = "" , mod_msg = "";
     public static ArrayList<morse> mkey = new ArrayList<>();
     public static ClipboardManager clipboardManager;
     public static ClipData clipData ;
-     Org_text org ;
-     Mod_text mod ;
+    Org_text org ;
+    Mod_text mod ;
 
-     Button e_c_b , d_c_b;
+    Button e_c_b , d_c_b;
     EditText ek , dk;
 
-
-
-
-
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mtogle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +73,13 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        drawerLayout = findViewById(R.id.root);
+        mtogle = new ActionBarDrawerToggle(this , drawerLayout, R.string.open , R.string.close);
+        drawerLayout.addDrawerListener(mtogle);
+        mtogle.syncState();
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setIcon(R.drawable.noun_ic);
 
 

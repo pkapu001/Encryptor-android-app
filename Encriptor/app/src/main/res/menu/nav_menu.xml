@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Settings"
+        android:id="@+id/settings"
+        android:icon="@drawable/settings"
+        />
+
+    <item
+        android:title="Recent History"
+        android:id="@+id/history"
+        android:icon="@drawable/history"
+        />
+    <item
+        android:title="Save Current Encryption"
+        android:id="@+id/save"
+        android:icon="@drawable/bookmark"
+        />
+
+    <item
+        android:title="Saved Encryptions"
+        android:id="@+id/saved"
+        android:icon="@drawable/bookmarks"
+        />
+
+</menu>

@@ -1,389 +1,405 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<android.support.v4.widget.DrawerLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
     android:focusable="true"
+
+
     android:focusableInTouchMode="true"
-
-
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <include
-        layout="@layout/toolbar"
-        />
-
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
-        android:fillViewport="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar" />
 
 
-        <android.support.constraint.ConstraintLayout
-
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#000"
             android:clickable="true"
+            android:fillViewport="true"
             android:focusable="true"
-
-
             android:focusableInTouchMode="true">
 
 
-            <LinearLayout
-                android:id="@+id/d_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <android.support.constraint.ConstraintLayout
 
-                android:layout_marginEnd="24dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="#000"
+                android:clickable="true"
+                android:focusable="true"
 
-                android:divider="@drawable/divider"
 
+                android:focusableInTouchMode="true">
 
-                android:dividerPadding="15dp"
-                android:minHeight="210dp"
-                android:orientation="vertical"
-                android:showDividers="middle"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/e_layout"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="47dp"
-
-                    android:orientation="horizontal">
-
-
-                    <EditText
-                        android:id="@+id/d_c_key"
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/mytextbox"
-                        android:ems="10"
-                        android:hint="KEY"
-                        android:inputType="number"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="5dp"
-                        android:textAlignment="center"
-                        android:textColor="#ffffff"
-                        android:textColorHint="#B8B8B8" />
-
-                    <Button
-                        android:id="@+id/d_caesar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/my_button"
-                        android:onClick="d_c_b"
-                        android:text="Caesar"
-                        android:textColor="#fff" />
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/d_atbash"
-                    android:layout_width="match_parent"
+                    android:id="@+id/d_layout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/my_button"
 
-                    android:onClick="d_at_b"
-                    android:text="AT-Bash"
-                    android:textColor="#fff" />
-
-                <Button
-                    android:id="@+id/d_nl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/my_button"
-
-                    android:onClick="d_nl_b"
-                    android:text="Num-Letter"
-                    android:textColor="#fff" />
-
-                <Button
-                    android:id="@+id/d_morse"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/my_button"
-                    android:onClick="d_m_b"
-                    android:text="Morse"
-                    android:textColor="#fff" />
-
-            </LinearLayout>
-
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="16dp"
-                android:background="#000"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/d_layout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_contaner">
-
-                <RadioButton
-                    android:id="@+id/encript_rb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:layout_weight="1"
-                    android:buttonTint="@color/colorAccent"
-                    android:checked="false"
-                    android:text="ENCRYPT"
-                    android:textColor="#fff"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/decript_rd"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="186dp" />
+                    android:background="#000"
 
-                <RadioButton
-                    android:id="@+id/decript_rd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/colorAccent"
-                    android:text="DECRYPT"
-                    android:textColor="#fff"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:divider="@drawable/divider"
+
+
+                    android:dividerPadding="15dp"
+                    android:minHeight="210dp"
+                    android:orientation="vertical"
+                    android:showDividers="middle"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/encript_rb"
-                    tools:layout_editor_absoluteY="186dp" />
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/e_layout"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
-            </RadioGroup>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="47dp"
 
-            <LinearLayout
-                android:id="@+id/e_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:background="#000"
-                android:divider="@drawable/divider"
-                android:orientation="vertical"
-                android:showDividers="middle"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toStartOf="@+id/d_layout"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+                        android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="47dp"
-                    android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/e_c_key"
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/mytextbox"
-                        android:ems="10"
-                        android:hint="KEY"
-                        android:inputType="number"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="5dp"
-                        android:textAlignment="center"
-                        android:textColor="#ffffff"
-                        android:textColorHint="#B8B8B8" />
+                        <EditText
+                            android:id="@+id/d_c_key"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/mytextbox"
+                            android:ems="10"
+                            android:hint="KEY"
+                            android:inputType="number"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="5dp"
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            android:textColorHint="#B8B8B8" />
+
+                        <Button
+                            android:id="@+id/d_caesar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/my_button"
+                            android:onClick="d_c_b"
+                            android:text="Caesar"
+                            android:textColor="#fff" />
+                    </LinearLayout>
 
                     <Button
-                        android:id="@+id/e_caesar"
+                        android:id="@+id/d_atbash"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/my_button"
-                        android:onClick="e_c_b"
-                        android:text="Caesar"
+
+                        android:onClick="d_at_b"
+                        android:text="AT-Bash"
                         android:textColor="#fff" />
+
+                    <Button
+                        android:id="@+id/d_nl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/my_button"
+
+                        android:onClick="d_nl_b"
+                        android:text="Num-Letter"
+                        android:textColor="#fff" />
+
+                    <Button
+                        android:id="@+id/d_morse"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/my_button"
+                        android:onClick="d_m_b"
+                        android:text="Morse"
+                        android:textColor="#fff" />
+
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/e_atbash"
-                    android:layout_width="match_parent"
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/my_button"
-                    android:onClick="e_at_b"
-                    android:text="AT-Bash"
-                    android:textColor="#fff" />
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#000"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/d_layout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_contaner">
 
-                <Button
-                    android:id="@+id/e_nl"
-                    android:layout_width="match_parent"
+                    <RadioButton
+                        android:id="@+id/encript_rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorAccent"
+                        android:checked="false"
+                        android:text="ENCRYPT"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/decript_rd"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:layout_editor_absoluteY="186dp" />
+
+                    <RadioButton
+                        android:id="@+id/decript_rd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorAccent"
+                        android:text="DECRYPT"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/encript_rb"
+                        tools:layout_editor_absoluteY="186dp" />
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/e_layout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/my_button"
-                    android:onClick="e_nl_b"
-                    android:text="Num-Letter"
-                    android:textColor="#fff" />
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:background="#000"
+                    android:divider="@drawable/divider"
+                    android:orientation="vertical"
+                    android:showDividers="middle"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toStartOf="@+id/d_layout"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
-                <Button
-                    android:id="@+id/E_morse"
-                    android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="47dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/e_c_key"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/mytextbox"
+                            android:ems="10"
+                            android:hint="KEY"
+                            android:inputType="number"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="5dp"
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            android:textColorHint="#B8B8B8" />
+
+                        <Button
+                            android:id="@+id/e_caesar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/my_button"
+                            android:onClick="e_c_b"
+                            android:text="Caesar"
+                            android:textColor="#fff" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/e_atbash"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/my_button"
+                        android:onClick="e_at_b"
+                        android:text="AT-Bash"
+                        android:textColor="#fff" />
+
+                    <Button
+                        android:id="@+id/e_nl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/my_button"
+                        android:onClick="e_nl_b"
+                        android:text="Num-Letter"
+                        android:textColor="#fff" />
+
+                    <Button
+                        android:id="@+id/E_morse"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/my_button"
+                        android:onClick="e_m_b"
+                        android:text="Morse"
+                        android:textColor="#fff" />
+
+                </LinearLayout>
+
+                <ToggleButton
+                    android:id="@+id/toggleButton"
+                    android:layout_width="126dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/my_button"
-                    android:onClick="e_m_b"
-                    android:text="Morse"
-                    android:textColor="#fff" />
+                    android:checked="false"
+                    android:text="ToggleButton"
+                    android:textColor="#fff"
+                    android:textOff="modified text"
+                    android:textOn="orginal text"
+                    app:layout_constraintEnd_toEndOf="@+id/frag_contaner"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+                <FrameLayout
+                    android:id="@+id/frag_contaner"
+                    android:layout_width="0dp"
+                    android:layout_height="95dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintEnd_toStartOf="@+id/copybutton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton">
 
-            <ToggleButton
-                android:id="@+id/toggleButton"
-                android:layout_width="126dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/my_button"
-                android:checked="false"
-                android:text="ToggleButton"
-                android:textColor="#fff"
-                android:textOff="modified text"
-                android:textOn="orginal text"
-                app:layout_constraintEnd_toEndOf="@+id/frag_contaner"
-                app:layout_constraintTop_toTopOf="parent" />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/frag_contaner"
-                android:layout_width="0dp"
-                android:layout_height="95dp"
-                android:layout_marginEnd="1dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
-                app:layout_constraintEnd_toStartOf="@+id/copybutton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toggleButton">
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_marginEnd="10dp"
+                    android:text=" SEE : "
 
-            </FrameLayout>
+                    android:textColor="#A0A0A0"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/toggleButton"
+                    app:layout_constraintEnd_toStartOf="@+id/toggleButton" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="17dp"
-                android:layout_marginEnd="10dp"
-                android:text=" SEE : "
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:adjustViewBounds="false"
+                    android:background="@android:color/transparent"
+                    android:cropToPadding="false"
+                    android:onClick="reset_b"
 
-                android:textColor="#A0A0A0"
-                app:layout_constraintBaseline_toBaselineOf="@+id/toggleButton"
-                app:layout_constraintEnd_toStartOf="@+id/toggleButton" />
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="12dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"
-                android:adjustViewBounds="false"
-                android:background="@android:color/transparent"
-                android:cropToPadding="false"
-                android:onClick="reset_b"
-
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/d_layout"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/reset" />
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/d_layout"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:srcCompat="@drawable/reset" />
 
 
-            <ImageButton
-                android:id="@+id/copybutton"
-                android:layout_width="75px"
-                android:layout_height="75px"
-                android:layout_marginBottom="2dp"
-                android:layout_marginEnd="5dp"
-                android:adjustViewBounds="false"
-                android:background="@android:color/transparent"
-                android:cropToPadding="false"
-                android:onClick="COPY"
-                android:scaleType="fitCenter"
-                android:src="@drawable/cb"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_contaner"
-                app:layout_constraintEnd_toEndOf="parent" />
+                <ImageButton
+                    android:id="@+id/copybutton"
+                    android:layout_width="75px"
+                    android:layout_height="75px"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:adjustViewBounds="false"
+                    android:background="@android:color/transparent"
+                    android:cropToPadding="false"
+                    android:onClick="COPY"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/cb"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_contaner"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="17dp"
-                android:layout_marginBottom="16dp"
-                android:text="reset"
-                android:textAlignment="center"
-                android:textColor="#fff"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton"
-                app:layout_constraintStart_toStartOf="@+id/imageButton" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="17dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="reset"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageButton"
+                    app:layout_constraintStart_toStartOf="@+id/imageButton" />
 
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="40dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="16dp"
-                android:adjustViewBounds="true"
-                android:background="@android:color/transparent"
-                android:onClick="showinfo"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toTopOf="@+id/textView4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/i" />
+                <ImageButton
+                    android:id="@+id/imageButton2"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="16dp"
+                    android:adjustViewBounds="true"
+                    android:background="@android:color/transparent"
+                    android:onClick="showinfo"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/textView4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/i" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Info"
-                android:textAlignment="center"
-                android:textColor="#fff"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton2"
-                app:layout_constraintStart_toStartOf="@+id/imageButton2" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Info"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/imageButton2"
+                    app:layout_constraintStart_toStartOf="@+id/imageButton2" />
 
-            <ImageButton
-                android:id="@+id/paste"
-                android:layout_width="75px"
-                android:layout_height="75px"
-                android:background="@android:color/transparent"
-                android:onClick="paste"
-                android:scaleType="fitCenter"
-                app:layout_constraintEnd_toEndOf="@+id/copybutton"
-                app:layout_constraintStart_toStartOf="@+id/copybutton"
-                app:layout_constraintTop_toTopOf="@+id/frag_contaner"
-                app:srcCompat="@drawable/paste" />
+                <ImageButton
+                    android:id="@+id/paste"
+                    android:layout_width="75px"
+                    android:layout_height="75px"
+                    android:background="@android:color/transparent"
+                    android:onClick="paste"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="@+id/copybutton"
+                    app:layout_constraintStart_toStartOf="@+id/copybutton"
+                    app:layout_constraintTop_toTopOf="@+id/frag_contaner"
+                    app:srcCompat="@drawable/paste" />
 
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
-</LinearLayout>
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/colorPrimaryDark"
+        app:itemTextColor="#fff"
+        app:itemIconTint="@android:color/white"
+        app:menu="@menu/nav_menu"
+
+        ></android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>
