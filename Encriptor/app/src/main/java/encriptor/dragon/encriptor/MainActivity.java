@@ -7,12 +7,16 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,10 +35,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Mod_interface,Org_interface  {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mtogle;
+    public NavigationView navigationView  ;
 
     public static FragmentManager fragmentManager;
     public static InputStream is;
@@ -55,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mtogle.onOptionsItemSelected(item))
         {
+
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -68,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
         actionBar.setIcon(R.drawable.noun_ic);*/
 
 
-
         setContentView(R.layout.activity_main);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -78,10 +83,12 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
         mtogle = new ActionBarDrawerToggle(this , drawerLayout, R.string.open , R.string.close);
         drawerLayout.addDrawerListener(mtogle);
         mtogle.syncState();
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setIcon(R.drawable.noun_ic);
 
+        navigationView =(NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         fragmentManager = getFragmentManager();
           org = new Org_text();
@@ -241,6 +248,9 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
                 return false;
             }
         });
+
+       // navigationView =(NavigationView) findViewById(R.id.nav_view);
+       // navigationView.setNavigationItemSelectedListener(this);
 
 
     }
@@ -504,5 +514,43 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
             Toast.makeText(MainActivity.this , "cant paste after action started, please reset" ,Toast.LENGTH_LONG).show();
         }
 
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int n = item.getItemId() ;
+        switch (n)
+        {
+            case R.id.home:
+            {
+                Toast.makeText(MainActivity.this , "this is home" ,Toast.LENGTH_LONG).show();
+
+                break;
+            }
+            case R.id.settings:
+            {
+
+
+                break;
+            }
+            case R.id.history:
+            {
+
+
+                break;
+            }
+            case R.id.save:
+            {
+
+                break;
+            }
+            case R.id.saved:
+            {
+
+                break;
+            }
+        }
+        return false;
     }
 }
