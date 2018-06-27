@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -53,13 +54,18 @@ public class MainActivity extends AppCompatActivity implements Mod_interface,Org
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
+       /* ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.drawable.noun_ic);
+        actionBar.setIcon(R.drawable.noun_ic);*/
 
 
 
         setContentView(R.layout.activity_main);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.noun_ic);
 
 
         fragmentManager = getFragmentManager();
