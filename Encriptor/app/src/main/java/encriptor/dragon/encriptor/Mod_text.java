@@ -19,7 +19,7 @@ import android.widget.TextView;
 public class Mod_text extends Fragment {
 
 
-    TextView textView;
+    EditText editText;
     //Mod_interface mc;
     public Mod_text() {
         // Required empty public constructor
@@ -45,8 +45,10 @@ public class Mod_text extends Fragment {
         // Inflate the layout for this
         View view =inflater.inflate(R.layout.fragment_mod_text, container, false);
 
-          textView = view.findViewById(R.id.mod_tv);
+          editText = view.findViewById(R.id.mod_tv);
           update_mod_text(MainActivity.mod_msg);
+          editText.setEnabled(MainActivity.advance_mode);
+
 
         return view;
     }
@@ -54,16 +56,22 @@ public class Mod_text extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        textView.setText(MainActivity.mod_msg);
+        editText.setText(MainActivity.mod_msg);
+        editText.setEnabled(MainActivity.advance_mode);
     }
 
     public void update_mod_text(String s){
-        textView.setText(s);
+        editText.setText(s);
+    }
+
+    public String getmod_text()
+    {
+        return editText.getText().toString();
     }
 
     public void reset()
     {
-        textView.setText("");
+        editText.setText("");
     }
 
 

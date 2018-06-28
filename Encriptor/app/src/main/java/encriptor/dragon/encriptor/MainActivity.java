@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mtogle;
     public NavigationView navigationView  ;
-    public boolean advance_mode=true;
+    public static boolean advance_mode=true;
 
     public static FragmentManager fragmentManager;
     public static InputStream is;
@@ -271,6 +271,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             org_msg = org.get_orgmsg();
             mod_msg = org_msg;
+        }else if(advance_mode)
+        {
+            mod_msg = mod.getmod_text();
         }
         mod_msg= encription.atbash(mod_msg);
        // fragmentManager.beginTransaction().replace(R.id.frag_contaner, mod, null).commit();
@@ -289,10 +292,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void e_nl_b(View view)
     {
 
-        if(notstarted &&! advance_mode)
+        if(notstarted )
         {
             org_msg = org.get_orgmsg();
             mod_msg = org_msg;
+        }else if(advance_mode)
+        {
+            mod_msg = mod.getmod_text();
         }
         mod_msg= encription.n_l(mod_msg);
        // fragmentManager.beginTransaction().replace(R.id.frag_contaner, mod, null).commit();
@@ -313,6 +319,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             org_msg = org.get_orgmsg();
             mod_msg = org_msg;
+        }else if(advance_mode)
+        {
+            mod_msg = mod.getmod_text();
         }
         mod_msg= morse.e_morse(mod_msg,mkey);
         if(notstarted)
@@ -332,6 +341,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             org_msg = org.get_orgmsg();
             mod_msg = org_msg;
+        }else if(advance_mode)
+        {
+            mod_msg = mod.getmod_text();
         }
         mod_msg= encription.atbash(mod_msg);
         if(notstarted)
@@ -350,6 +362,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             org_msg = org.get_orgmsg();
             mod_msg = org_msg;
+        }else if(advance_mode)
+        {
+            mod_msg = mod.getmod_text();
         }
         mod_msg= decription.n_l(mod_msg);
         if(notstarted)
@@ -368,6 +383,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             org_msg = org.get_orgmsg();
             mod_msg = org_msg;
+        }else if(advance_mode)
+        {
+            mod_msg = mod.getmod_text();
         }
 
         mod_msg= morse.d_morse(mod_msg,mkey);
@@ -381,17 +399,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         notstarted = false;
     }
 
-
-
-
-
-
     public void e_c_b(View view) {
         int key=0;
         if(notstarted)
         {
             org_msg = org.get_orgmsg();
             mod_msg = org_msg;
+        }else if(advance_mode)
+        {
+            mod_msg = mod.getmod_text();
         }
         int temp;
         if(!ek.getText().toString().equals("")){
@@ -423,6 +439,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             org_msg = org.get_orgmsg();
             mod_msg = org_msg;
+        }else if(advance_mode)
+        {
+            mod_msg = mod.getmod_text();
         }
         int temp;
         if(!dk.getText().toString().equals("")){
@@ -521,6 +540,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onPause() {
         super.onPause();
         org_msg = org.get_orgmsg();
+        mod_msg = mod.getmod_text();
     }
 
 
@@ -528,6 +548,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStop() {
         super.onStop();
         org_msg = org.get_orgmsg();
+        mod_msg = mod.getmod_text();
     }
 /*
 
@@ -536,7 +557,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
        // org.update_org_txt(org_msg);
     }
-    
+
     @Override
     protected void onStart() {
         super.onStart();
