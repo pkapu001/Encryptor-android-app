@@ -54,29 +54,10 @@ public class Org_text extends Fragment {
         View view = inflater.inflate(R.layout.fragment_org_text, container, false);
 
                 editText = view.findViewById(R.id.org_tv);
-                editText.setEnabled(MainActivity.notstarted);
+                //editText.setEnabled(MainActivity.notstarted);
                // editText.setText(MainActivity.org_msg);
 
 
-        /*editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                if(editText.isEnabled())
-                {
-                    MainActivity.org_msg = editText.getText().toString();
-
-                }
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });*/
 
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -86,25 +67,10 @@ public class Org_text extends Fragment {
                 }
             }
         });
-/*
-        ConstraintLayout cy = (ConstraintLayout)view.findViewById(R.id.ff);
-        cy.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    hideKeyboard(v);
-                }
-            }
-        });
-*/
-
-
-
-
-
 
         return view;
     }
+
 
     @Override
     public void onStop() {
@@ -121,10 +87,12 @@ public class Org_text extends Fragment {
 
     public void update_org_txt(String s)
     {
-
         editText.setText(s);
+    }
 
-
+    public void setedittext_enable(boolean s)
+    {
+        editText.setEnabled(s);
     }
 
 

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mtogle;
     public NavigationView navigationView  ;
+    public boolean advance_mode=true;
 
     public static FragmentManager fragmentManager;
     public static InputStream is;
@@ -288,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void e_nl_b(View view)
     {
 
-        if(notstarted)
+        if(notstarted &&! advance_mode)
         {
             org_msg = org.get_orgmsg();
             mod_msg = org_msg;
@@ -516,7 +517,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        org_msg = org.get_orgmsg();
+    }
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        org_msg = org.get_orgmsg();
+    }
+/*
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // org.update_org_txt(org_msg);
+    }
+    
+    @Override
+    protected void onStart() {
+        super.onStart();
+        org.update_org_txt(org_msg);
+    }
+*/
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int n = item.getItemId() ;
@@ -524,14 +550,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             case R.id.home:
             {
-                Intent intent = new Intent(this,MainActivity.class);
-                startActivity(intent);
+                Toast.makeText(MainActivity.this , "You are in home" ,Toast.LENGTH_SHORT).show();
 
                 break;
             }
             case R.id.settings:
             {
-
+                Intent intent = new Intent(this,settings.class);
+                startActivity(intent);
 
                 break;
             }
