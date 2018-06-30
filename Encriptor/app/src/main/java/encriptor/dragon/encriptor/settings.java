@@ -83,17 +83,17 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.history:
             {
 
-
+                Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_LONG).show();
                 break;
             }
             case R.id.save:
             {
-
+                Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_LONG).show();
                 break;
             }
             case R.id.saved:
             {
-
+                Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_LONG).show();
                 break;
             }
             case R.id.info1:
