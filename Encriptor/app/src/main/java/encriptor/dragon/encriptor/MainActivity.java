@@ -676,7 +676,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Log.e("error on navigation",ex.getMessage());
                 }*/
                 Intent intent = new Intent(this,settings.class);
-                startActivity(intent);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent, 0);
+
 
 
                 break;
@@ -684,17 +686,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.history:
             {
 
-                Toast.makeText(MainActivity.this , "Coming soon" ,Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.save:
             {
-                Toast.makeText(MainActivity.this , "Coming soon" ,Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.saved:
             {
-                Toast.makeText(MainActivity.this , "Coming soon" ,Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.info1:

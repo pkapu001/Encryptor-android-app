@@ -51,12 +51,12 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
 
         adv_switch = findViewById(R.id.adv_switch);
-        adv_switch.setOnCheckedChangeListener(this);
         adv_switch.setChecked(MainActivity.advance_mode);
+        adv_switch.setOnCheckedChangeListener(this);
 
         path_switch = findViewById(R.id.encryptin_path_switch);
-        path_switch.setOnCheckedChangeListener(this);
         path_switch.setChecked(MainActivity.encription_path_setting);
+        path_switch.setOnCheckedChangeListener(this);
 
     }
 
@@ -83,17 +83,17 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.history:
             {
 
-                Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_LONG).show();
+                Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.save:
             {
-                Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_LONG).show();
+                Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.saved:
             {
-                Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_LONG).show();
+                Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.info1:
@@ -126,7 +126,10 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
             {
                 MainActivity.advance_mode = isChecked;
                 MainActivity.saved_settings.write_adv_setting(MainActivity.advance_mode);
-                Toast.makeText(settings.this,"advance mode updated ", Toast.LENGTH_SHORT).show();
+                if(isChecked)
+                    Toast.makeText(settings.this,"You can edit the modfied text now ", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(settings.this,"Advance mode is turned OFF ", Toast.LENGTH_LONG).show();
                 break ;
             }
 
@@ -134,7 +137,10 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
             {
                 MainActivity.encription_path_setting = isChecked;
                 MainActivity.saved_settings.write_show_path_setting(MainActivity.encription_path_setting);
-                Toast.makeText(settings.this,"advance mode updated ", Toast.LENGTH_SHORT).show();
+                if(isChecked)
+                    Toast.makeText(settings.this,"Show encryption path is ON ", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(settings.this,"Show encryption path is OFF ", Toast.LENGTH_LONG).show();
                 break ;
             }
         }

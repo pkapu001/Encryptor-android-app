@@ -390,13 +390,17 @@
                 <TextView
                     android:id="@+id/encription_path"
                     android:layout_width="0dp"
-                    android:layout_height="13dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:ems="10"
-                    android:inputType="text"
+
+                    android:focusable="true"
+
+                    android:selectAllOnFocus="true"
                     android:textAlignment="center"
                     android:textColor="@color/red"
+                    android:textIsSelectable="true"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
