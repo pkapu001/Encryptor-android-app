@@ -16,4 +16,9 @@
 
     <string name="morse_info">Morse code is a method of sending text messages by keying in a series of electronic pulses usually represented as a short pulse (called a "bot") and a long pulse (a "dash")</string>
 
+
+    <string name="settings">encriptor.dragon.encriptor.saved_settings</string>
+    <string name="saved_advanced_mode">encriptor.dragon.encriptor.saved_advanced_mode</string>
+    <string name="saved_show_path">encriptor.dragon.encriptor.saved_show_path</string>
+
 </resources>

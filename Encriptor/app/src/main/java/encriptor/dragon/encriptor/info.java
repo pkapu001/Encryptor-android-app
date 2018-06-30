@@ -20,6 +20,7 @@ public class info extends Activity {
         try{
             setContentView(R.layout.activity_info);
             Slidr.attach(this);
+
         }catch (Exception ex)
         {
             Log.e("on info",ex.getMessage());

@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     EditText ek , dk;
     TextView path_text;
 
+    public static shared_pref_config saved_settings;
+
 
 
     @Override
@@ -76,11 +78,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        saved_settings = new shared_pref_config(getApplicationContext());
        /* ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.noun_ic);*/
 
-
+        advance_mode = saved_settings.read_adv_setting();
+        encription_path_setting = saved_settings.read_show_path_setting();
         setContentView(R.layout.activity_main);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -102,6 +106,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mod = new Mod_text();
         path_text = findViewById(R.id.encription_path);
         path_text.setText(encription_path);
+        if(encription_path_setting)
+        {
+            path_text.setVisibility(View.VISIBLE);
+        }else
+        {
+            path_text.setVisibility(View.INVISIBLE);
+        }
+
 
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
@@ -290,11 +302,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else{
             mod.update_mod_text(mod_msg);
         }
-        if(encription_path_setting)
-        {
+       // if(encription_path_setting){
             encription_path += "E_AT-Bash -> ";
             path_text.setText(encription_path);
-        }
+        //}
 
         notstarted = false;
 
@@ -322,10 +333,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mod.update_mod_text(mod_msg);
         }
 
-        if(encription_path_setting) {
+        //if(encription_path_setting) {
             encription_path += "E_Number-Letter -> ";
             path_text.setText(encription_path);
-        }
+
 
 
         notstarted = false;
@@ -350,10 +361,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mod.update_mod_text(mod_msg);
         }
 
-        if(encription_path_setting) {
+        //if(encription_path_setting) {
             encription_path += "E_Morse -> ";
             path_text.setText(encription_path);
-        }
+
 
         notstarted = false;
     }
@@ -376,10 +387,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mod.update_mod_text(mod_msg);
         }
 
-        if(encription_path_setting) {
+       // if(encription_path_setting) {
             encription_path += "D_AT-Bash -> ";
             path_text.setText(encription_path);
-        }
+
 
         notstarted = false;
     }
@@ -401,10 +412,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else{
             mod.update_mod_text(mod_msg);
         }
-        if(encription_path_setting) {
+        //if(encription_path_setting) {
             encription_path += "D_Number-Letter -> ";
             path_text.setText(encription_path);
-        }
+
 
         notstarted = false;
     }
@@ -428,10 +439,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mod.update_mod_text(mod_msg);
         }
 
-        if(encription_path_setting) {
+       // if(encription_path_setting) {
             encription_path += "D_Morse -> ";
             path_text.setText(encription_path);
-        }
+
 
         notstarted = false;
     }
@@ -463,10 +474,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } else {
                 mod.update_mod_text(mod_msg);
             }
-            if(encription_path_setting) {
+           // if(encription_path_setting) {
                 encription_path += "E_Caeser key:" + key+ " -> ";
                 path_text.setText(encription_path);
-            }
+
             notstarted = false;
         }else{
             Toast.makeText(MainActivity.this,"key should be between 0 and 27", Toast.LENGTH_SHORT ).show();
@@ -505,10 +516,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } else {
                 mod.update_mod_text(mod_msg);
             }
-            if(encription_path_setting) {
+
+
                 encription_path += "D_Caeser key:" + key + " -> ";
                 path_text.setText(encription_path);
-            }
+
+
+
             notstarted = false;
         }else{
             Toast.makeText(MainActivity.this,"key should be between 0 and 27", Toast.LENGTH_SHORT ).show();
@@ -585,11 +599,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
-
+        drawerLayout.closeDrawers();
         org_msg = org.get_orgmsg();
         if(!notstarted && mod != null)
         mod_msg = mod.getmod_text();
-        drawerLayout.closeDrawers();
+
+        //drawerLayout.closeDrawers();
 
        // encription_path = path_text.getText().toString();
     }
@@ -609,10 +624,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
 
             if(!notstarted && mod !=null && org !=null )
+            {
                 mod.update_advance_mod(advance_mode);
                 org.setorgtext_enable(false);
+            }
 
 
+        if(encription_path_setting)
+        {
+            path_text.setVisibility(View.VISIBLE);
+        }else
+        {
+            path_text.setVisibility(View.INVISIBLE);
+        }
 
         path_text.setText(encription_path);
 
@@ -626,7 +650,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(!notstarted && mod !=null)
                 mod.update_advance_mod(advance_mode);
 
-            
+
 
 
     }

@@ -19,7 +19,7 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
 
     private NavigationView navigationView;
     private ActionBarDrawerToggle mtogle;
-    private Switch adv_switch ;
+    private Switch adv_switch ,path_switch ;
     private DrawerLayout drawerLayout ;
 
 
@@ -53,6 +53,10 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
         adv_switch = findViewById(R.id.adv_switch);
         adv_switch.setOnCheckedChangeListener(this);
         adv_switch.setChecked(MainActivity.advance_mode);
+
+        path_switch = findViewById(R.id.encryptin_path_switch);
+        path_switch.setOnCheckedChangeListener(this);
+        path_switch.setChecked(MainActivity.encription_path_setting);
 
     }
 
@@ -121,6 +125,15 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.adv_switch:
             {
                 MainActivity.advance_mode = isChecked;
+                MainActivity.saved_settings.write_adv_setting(MainActivity.advance_mode);
+                Toast.makeText(settings.this,"advance mode updated ", Toast.LENGTH_SHORT).show();
+                break ;
+            }
+
+            case R.id.encryptin_path_switch:
+            {
+                MainActivity.encription_path_setting = isChecked;
+                MainActivity.saved_settings.write_show_path_setting(MainActivity.encription_path_setting);
                 Toast.makeText(settings.this,"advance mode updated ", Toast.LENGTH_SHORT).show();
                 break ;
             }
