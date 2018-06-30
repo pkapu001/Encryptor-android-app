@@ -82,6 +82,7 @@ public class Org_text extends Fragment {
     public void onResume() {
         super.onResume();
         editText.setText(MainActivity.org_msg);
+        editText.setEnabled(MainActivity.notstarted);
 
     }
 
@@ -90,7 +91,7 @@ public class Org_text extends Fragment {
         editText.setText(s);
     }
 
-    public void setedittext_enable(boolean s)
+    public void setorgtext_enable(boolean s)
     {
         editText.setEnabled(s);
     }

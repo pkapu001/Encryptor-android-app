@@ -69,6 +69,8 @@ public class Mod_text extends Fragment {
         return editText.getText().toString();
     }
 
+    public void update_advance_mod(boolean b){ editText.setEnabled(b);}
+
     public void reset()
     {
         editText.setText("");

@@ -3,6 +3,7 @@ package encriptor.dragon.encriptor;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
@@ -16,9 +17,19 @@ public class info extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info);
-        Slidr.attach(this);
+        try{
+            setContentView(R.layout.activity_info);
+            Slidr.attach(this);
+        }catch (Exception ex)
+        {
+            Log.e("on info",ex.getMessage());
+        }
+
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

@@ -7,18 +7,43 @@
     android:layout_height="match_parent"
     android:id="@+id/s_drawer"
     tools:context=".settings">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000">
-    <include  layout="@layout/toolbar" />
-    <android.support.constraint.ConstraintLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000">
+        android:background="#000"
+        android:orientation="vertical">
 
-    </android.support.constraint.ConstraintLayout>
-</LinearLayout>
+        <include layout="@layout/toolbar" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000">
+
+            <Switch
+                android:id="@+id/adv_switch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:checked="false"
+
+                android:enabled="true"
+                android:showText="true"
+                android:text="Advanced settings"
+                android:textAlignment="textStart"
+                android:textColor="#ffffff"
+
+                android:textSize="18sp"
+                android:track="@drawable/switch_custom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/settings_nav_view"

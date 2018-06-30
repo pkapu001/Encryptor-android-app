@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mtogle;
     public NavigationView navigationView  ;
-    public static boolean advance_mode=true;
+    public static boolean advance_mode=false , encription_path_setting = true;
+    public static String encription_path = "";
 
     public static FragmentManager fragmentManager;
     public static InputStream is;
@@ -51,11 +53,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static ArrayList<morse> mkey = new ArrayList<>();
     public static ClipboardManager clipboardManager;
     public static ClipData clipData ;
+
     Org_text org ;
     Mod_text mod ;
 
     Button e_c_b , d_c_b;
     EditText ek , dk;
+    TextView path_text;
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -92,9 +98,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         fragmentManager = getFragmentManager();
-          org = new Org_text();
-          mod = new Mod_text();
-
+        org = new Org_text();
+        mod = new Mod_text();
+        path_text = findViewById(R.id.encription_path);
+        path_text.setText(encription_path);
 
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
@@ -283,6 +290,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else{
             mod.update_mod_text(mod_msg);
         }
+        if(encription_path_setting)
+        {
+            encription_path += "E_AT-Bash -> ";
+            path_text.setText(encription_path);
+        }
 
         notstarted = false;
 
@@ -310,6 +322,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mod.update_mod_text(mod_msg);
         }
 
+        if(encription_path_setting) {
+            encription_path += "E_Number-Letter -> ";
+            path_text.setText(encription_path);
+        }
+
+
         notstarted = false;
     }
 
@@ -330,6 +348,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toggle.setChecked(true);
         }else{
             mod.update_mod_text(mod_msg);
+        }
+
+        if(encription_path_setting) {
+            encription_path += "E_Morse -> ";
+            path_text.setText(encription_path);
         }
 
         notstarted = false;
@@ -353,6 +376,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mod.update_mod_text(mod_msg);
         }
 
+        if(encription_path_setting) {
+            encription_path += "D_AT-Bash -> ";
+            path_text.setText(encription_path);
+        }
+
         notstarted = false;
     }
 
@@ -372,6 +400,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toggle.setChecked(true);
         }else{
             mod.update_mod_text(mod_msg);
+        }
+        if(encription_path_setting) {
+            encription_path += "D_Number-Letter -> ";
+            path_text.setText(encription_path);
         }
 
         notstarted = false;
@@ -394,6 +426,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toggle.setChecked(true);
         }else{
             mod.update_mod_text(mod_msg);
+        }
+
+        if(encription_path_setting) {
+            encription_path += "D_Morse -> ";
+            path_text.setText(encription_path);
         }
 
         notstarted = false;
@@ -425,6 +462,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toggle.setChecked(true);
             } else {
                 mod.update_mod_text(mod_msg);
+            }
+            if(encription_path_setting) {
+                encription_path += "E_Caeser key:" + key+ " -> ";
+                path_text.setText(encription_path);
             }
             notstarted = false;
         }else{
@@ -464,6 +505,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } else {
                 mod.update_mod_text(mod_msg);
             }
+            if(encription_path_setting) {
+                encription_path += "D_Caeser key:" + key + " -> ";
+                path_text.setText(encription_path);
+            }
             notstarted = false;
         }else{
             Toast.makeText(MainActivity.this,"key should be between 0 and 27", Toast.LENGTH_SHORT ).show();
@@ -484,7 +529,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mod.update_mod_text(mod_msg);
 
             toggle.setChecked(false);
-
+            encription_path = "";
+            path_text.setText(encription_path);
 
             org.reset();
             ek.setText("");
@@ -539,8 +585,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
+
         org_msg = org.get_orgmsg();
+        if(!notstarted && mod != null)
         mod_msg = mod.getmod_text();
+        drawerLayout.closeDrawers();
+
+       // encription_path = path_text.getText().toString();
     }
 
 
@@ -548,22 +599,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStop() {
         super.onStop();
         org_msg = org.get_orgmsg();
+        if(!notstarted)
         mod_msg = mod.getmod_text();
     }
-/*
+
 
     @Override
     protected void onResume() {
         super.onResume();
-       // org.update_org_txt(org_msg);
+
+            if(!notstarted && mod !=null && org !=null )
+                mod.update_advance_mod(advance_mode);
+                org.setorgtext_enable(false);
+
+
+
+        path_text.setText(encription_path);
+
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        org.update_org_txt(org_msg);
+
+            if(!notstarted && mod !=null)
+                mod.update_advance_mod(advance_mode);
+
+            
+
+
     }
-*/
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int n = item.getItemId() ;
@@ -577,8 +644,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             case R.id.settings:
             {
+                /*try{
+                    Intent intent = new Intent(this,settings.class);
+                    startActivity(intent);
+                }catch (Exception ex)
+                {
+                    Log.e("error on navigation",ex.getMessage());
+                }*/
                 Intent intent = new Intent(this,settings.class);
                 startActivity(intent);
+
 
                 break;
             }
