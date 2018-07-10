@@ -1,7 +1,7 @@
 package encriptor.dragon.encriptor;
 
 
-import android.content.ClipData;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -9,8 +9,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
+
 
 
 /**
@@ -49,6 +50,16 @@ public class Mod_text extends Fragment {
           update_mod_text(MainActivity.mod_msg);
           editText.setEnabled(MainActivity.advance_mode);
 
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }else {
+                    showKeybord(v);
+                }
+            }
+        });
 
         return view;
     }
@@ -62,6 +73,7 @@ public class Mod_text extends Fragment {
 
     public void update_mod_text(String s){
         editText.setText(s);
+        editText.setSelection(editText.getText().length());
     }
 
     public String getmod_text()
@@ -71,10 +83,25 @@ public class Mod_text extends Fragment {
 
     public void update_advance_mod(boolean b){ editText.setEnabled(b);}
 
+    public boolean get_edittext_isenabled()
+    { return editText.isEnabled();}
+
     public void reset()
     {
         editText.setText("");
     }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+    public void showKeybord(View view)
+    {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+
 
 
 }

@@ -308,6 +308,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //}
 
         notstarted = false;
+        hideKeyboard(view);
 
 
     }
@@ -338,8 +339,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             path_text.setText(encription_path);
 
 
-
+        hideKeyboard(view);
         notstarted = false;
+
     }
 
     public void e_m_b(View view)
@@ -365,7 +367,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             encription_path += "E_Morse -> ";
             path_text.setText(encription_path);
 
-
+        hideKeyboard(view);
         notstarted = false;
     }
 
@@ -391,7 +393,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             encription_path += "D_AT-Bash -> ";
             path_text.setText(encription_path);
 
-
+        hideKeyboard(view);
         notstarted = false;
     }
 
@@ -416,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             encription_path += "D_Number-Letter -> ";
             path_text.setText(encription_path);
 
-
+        hideKeyboard(view);
         notstarted = false;
     }
 
@@ -443,7 +445,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             encription_path += "D_Morse -> ";
             path_text.setText(encription_path);
 
-
+        hideKeyboard(view);
         notstarted = false;
     }
 
@@ -482,7 +484,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else{
             Toast.makeText(MainActivity.this,"key should be between 0 and 27", Toast.LENGTH_SHORT ).show();
         }
-
+        hideKeyboard(view);
     }
 
     public void d_c_b(View view) {
@@ -527,6 +529,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else{
             Toast.makeText(MainActivity.this,"key should be between 0 and 27", Toast.LENGTH_SHORT ).show();
         }
+        hideKeyboard(view);
     }
 
     public void reset_b(View view)
@@ -553,7 +556,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             org.reset();
         }
-
+        hideKeyboard(view);
         Toast.makeText(MainActivity.this , "RESET SUCESSFUL" ,Toast.LENGTH_SHORT).show();
     }
 
@@ -623,11 +626,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
 
-            if(!notstarted && mod !=null && org !=null )
+        if(!notstarted  ){
+            if( mod !=null )
             {
                 mod.update_advance_mod(advance_mode);
+            }
+
+            if( org !=null )
+            {
                 org.setorgtext_enable(false);
             }
+        }
+
+
+
 
 
         if(encription_path_setting)
@@ -639,6 +651,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         path_text.setText(encription_path);
+
+
+       // Log.d("main rsme advmode", " " + advance_mode);
+       // Log.d("main rsme advmode", " "+mod.get_edittext_isenabled());
 
 
     }

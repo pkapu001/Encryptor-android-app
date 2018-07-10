@@ -64,6 +64,8 @@ public class Org_text extends Fragment {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     hideKeyboard(v);
+                }else {
+                    showKeybord(v);
                 }
             }
         });
@@ -110,6 +112,12 @@ public class Org_text extends Fragment {
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public void showKeybord(View view)
+    {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
     }
 
 

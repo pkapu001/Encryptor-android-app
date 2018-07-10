@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -125,6 +126,7 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.adv_switch:
             {
                 MainActivity.advance_mode = isChecked;
+
                 MainActivity.saved_settings.write_adv_setting(MainActivity.advance_mode);
                 if(isChecked)
                     Toast.makeText(settings.this,"You can edit the modfied text now ", Toast.LENGTH_LONG).show();

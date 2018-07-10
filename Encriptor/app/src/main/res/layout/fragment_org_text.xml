@@ -24,6 +24,8 @@
         android:focusable="true"
         android:clickable="true"
         android:focusableInTouchMode="true"
+
+
         android:gravity="start"
         android:hint="ENTER THE TEXT U WANT TO ENCRYPT OR DECRYPT"
         android:inputType="textMultiLine"
