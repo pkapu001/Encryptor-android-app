@@ -20,5 +20,12 @@
     <string name="settings">encriptor.dragon.encriptor.saved_settings</string>
     <string name="saved_advanced_mode">encriptor.dragon.encriptor.saved_advanced_mode</string>
     <string name="saved_show_path">encriptor.dragon.encriptor.saved_show_path</string>
+    <string name="title_activity_history">history</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

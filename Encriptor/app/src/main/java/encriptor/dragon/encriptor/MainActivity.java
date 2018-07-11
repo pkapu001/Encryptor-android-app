@@ -5,18 +5,17 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -535,9 +534,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void reset_b(View view)
     {
 
-        if(!notstarted){
-            RadioButton rb = findViewById(R.id.encript_rb);
 
+        if(!notstarted){
+            final String o , m ,e ;
+            o= org_msg;
+            m = mod_msg;
+            e=encription_path;
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    edbhelper helper = new edbhelper(MainActivity.this);
+                    SQLiteDatabase database = helper.getWritableDatabase();
+                    helper.addhistory(o,m,e,database);
+
+
+                    database.close();
+
+
+                }
+            }).start();
+
+            /*edbhelper helper = new edbhelper(MainActivity.this);
+            SQLiteDatabase database = helper.getWritableDatabase();
+            helper.addhistory(org_msg,mod_msg,encription_path,database);
+            database.close();*/
+
+            RadioButton rb = findViewById(R.id.encript_rb);
             org.reset();
             mod.reset();
             org_msg="";
@@ -702,6 +726,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.history:
             {
 
+                Intent intent = new Intent(this,history.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent, 0);
                 Toast.makeText(MainActivity.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
                 break;
             }
