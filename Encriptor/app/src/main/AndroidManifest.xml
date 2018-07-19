@@ -21,10 +21,12 @@
         <activity
             android:name=".info"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
-        <activity android:name=".settings" />
+        <activity
+            android:name=".settings"
+            android:label="SETTINGS"/>
         <activity
             android:name=".history"
-            android:label="@string/title_activity_history"
+            android:label="HISTORY"
             android:theme="@style/AppTheme" />
     </application>
 

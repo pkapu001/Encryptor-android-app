@@ -20,9 +20,8 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
 
     private NavigationView navigationView;
     private ActionBarDrawerToggle mtogle;
-    private Switch adv_switch ,path_switch ;
     private DrawerLayout drawerLayout ;
-
+    private Switch adv_switch ,path_switch ;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -38,6 +37,8 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         drawerLayout = findViewById(R.id.s_drawer);
@@ -83,8 +84,10 @@ public class settings extends AppCompatActivity implements NavigationView.OnNavi
             }
             case R.id.history:
             {
-
-                Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this,history.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent, 0);
+                //Toast.makeText(settings.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.save:

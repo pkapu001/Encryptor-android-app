@@ -2,12 +2,20 @@ package encriptor.dragon.encriptor;
 
 public class data {
 
-    private String org_text , mod_text , path_text ;
+    private String org_text , mod_text , path_text ,time ;
+    private Long id;
+    private boolean selected ;
 
-    public data(String org_text, String mod_text, String path_text) {
+
+
+    public data(Long id, String time , String org_text, String mod_text, String path_text  ) {
+        this.id=id;
+        this.time = time;
         this.org_text = org_text;
         this.mod_text = mod_text;
         this.path_text = path_text;
+        this.selected= false;
+
     }
 
     public String getOrg_text() {
@@ -32,5 +40,30 @@ public class data {
 
     public void setPath_text(String path_text) {
         this.path_text = path_text;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

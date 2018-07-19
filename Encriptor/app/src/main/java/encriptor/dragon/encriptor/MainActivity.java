@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,13 +34,23 @@ import android.widget.ToggleButton;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import static encriptor.dragon.encriptor.MainActivity.notstarted;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mtogle;
     public NavigationView navigationView  ;
+    public static background_thread backgroundThread = new background_thread();
+
+
+
     public static boolean advance_mode=false , encription_path_setting = true;
     public static String encription_path = "";
 
@@ -77,18 +88,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        saved_settings = new shared_pref_config(getApplicationContext());
-       /* ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.drawable.noun_ic);*/
+        backgroundThread.start();
 
+        saved_settings = new shared_pref_config(getApplicationContext());
         advance_mode = saved_settings.read_adv_setting();
         encription_path_setting = saved_settings.read_show_path_setting();
         setContentView(R.layout.activity_main);
-
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
         drawerLayout = findViewById(R.id.root);
         mtogle = new ActionBarDrawerToggle(this , drawerLayout, R.string.open , R.string.close);
         drawerLayout.addDrawerListener(mtogle);
@@ -104,7 +111,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         org = new Org_text();
         mod = new Mod_text();
         path_text = findViewById(R.id.encription_path);
-        path_text.setText(encription_path);
+        if(encription_path_setting){ path_text.setText(encription_path);
+        }else { path_text.setText("");}
+
         if(encription_path_setting)
         {
             path_text.setVisibility(View.VISIBLE);
@@ -303,7 +312,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
        // if(encription_path_setting){
             encription_path += "E_AT-Bash -> ";
-            path_text.setText(encription_path);
+        if(encription_path_setting){ path_text.setText(encription_path);
+        }else { path_text.setText("");}
+
+
+
         //}
 
         notstarted = false;
@@ -335,7 +348,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //if(encription_path_setting) {
             encription_path += "E_Number-Letter -> ";
-            path_text.setText(encription_path);
+        if(encription_path_setting){ path_text.setText(encription_path);
+        }else { path_text.setText("");}
+
 
 
         hideKeyboard(view);
@@ -364,7 +379,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //if(encription_path_setting) {
             encription_path += "E_Morse -> ";
-            path_text.setText(encription_path);
+        if(encription_path_setting){ path_text.setText(encription_path);
+        }else { path_text.setText("");}
 
         hideKeyboard(view);
         notstarted = false;
@@ -390,7 +406,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
        // if(encription_path_setting) {
             encription_path += "D_AT-Bash -> ";
-            path_text.setText(encription_path);
+            if(encription_path_setting){ path_text.setText(encription_path);
+        }else { path_text.setText("");}
 
         hideKeyboard(view);
         notstarted = false;
@@ -415,7 +432,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         //if(encription_path_setting) {
             encription_path += "D_Number-Letter -> ";
-            path_text.setText(encription_path);
+            if(encription_path_setting){ path_text.setText(encription_path);
+        }else { path_text.setText("");}
 
         hideKeyboard(view);
         notstarted = false;
@@ -442,7 +460,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
        // if(encription_path_setting) {
             encription_path += "D_Morse -> ";
-            path_text.setText(encription_path);
+            if(encription_path_setting){ path_text.setText(encription_path);
+        }else { path_text.setText("");}
 
         hideKeyboard(view);
         notstarted = false;
@@ -477,7 +496,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
            // if(encription_path_setting) {
                 encription_path += "E_Caeser key:" + key+ " -> ";
-                path_text.setText(encription_path);
+                if(encription_path_setting){ path_text.setText(encription_path);
+        }else { path_text.setText("");}
 
             notstarted = false;
         }else{
@@ -520,7 +540,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                 encription_path += "D_Caeser key:" + key + " -> ";
-                path_text.setText(encription_path);
+                if(encription_path_setting){ path_text.setText(encription_path);
+        }else { path_text.setText("");}
 
 
 
@@ -534,6 +555,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void reset_b(View view)
     {
 
+        final String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        int month = now.get(Calendar.MONTH) + 1; // Note: zero based!
+        int day = now.get(Calendar.DAY_OF_MONTH);
+        int hour = now.get(Calendar.HOUR_OF_DAY);
+        int minute = now.get(Calendar.MINUTE);
+        int second = now.get(Calendar.SECOND);
+
+        final String s = ""+year+""+month+""+day+""+hour+""+minute+""+second;
+        //final String s = ""+hour+"-"+minute+""+second+""+day+""+month+""+year;
+        final Long id = Long.parseLong(s);
+
 
         if(!notstarted){
             final String o , m ,e ;
@@ -541,27 +575,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             m = mod_msg;
             e=encription_path;
 
-            new Thread(new Runnable() {
+             new Thread(new Runnable() {
                 @Override
                 public void run() {
 
                     edbhelper helper = new edbhelper(MainActivity.this);
+
                     SQLiteDatabase database = helper.getWritableDatabase();
-                    helper.addhistory(o,m,e,database);
+                    helper.addhistory(id,currentDateTimeString,o,m,e,database);
 
 
                     database.close();
 
-
+                    Log.d("ID TIME :",s);
                 }
             }).start();
-
-            /*edbhelper helper = new edbhelper(MainActivity.this);
+/*
+            edbhelper helper = new edbhelper(MainActivity.this);
             SQLiteDatabase database = helper.getWritableDatabase();
             helper.addhistory(org_msg,mod_msg,encription_path,database);
-            database.close();*/
+            database.close();
+*/
+        // MainActivity.backgroundThread.mHandler.post(new addtodatabase(MainActivity.this));
+         //backgroundThread.start();
 
-            RadioButton rb = findViewById(R.id.encript_rb);
+        RadioButton rb = findViewById(R.id.encript_rb);
             org.reset();
             mod.reset();
             org_msg="";
@@ -571,7 +609,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             toggle.setChecked(false);
             encription_path = "";
-            path_text.setText(encription_path);
+            if(encription_path_setting){ path_text.setText(encription_path);
+        }else { path_text.setText(" ");}
 
             org.reset();
             ek.setText("");
@@ -669,12 +708,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(encription_path_setting)
         {
             path_text.setVisibility(View.VISIBLE);
+            path_text.setText(encription_path);
         }else
         {
             path_text.setVisibility(View.INVISIBLE);
+            path_text.setText(" ");
         }
-
-        path_text.setText(encription_path);
 
 
        // Log.d("main rsme advmode", " " + advance_mode);
@@ -729,7 +768,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(this,history.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityIfNeeded(intent, 0);
-                Toast.makeText(MainActivity.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MainActivity.this , "Coming soon" ,Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.save:
@@ -754,5 +793,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         return false;
+    }
+
+    class addtodatabase implements Runnable
+    {
+        Context context;
+
+        addtodatabase(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public void run() {
+            Log.d("background process: ", " adding info to data base");
+            final String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH) + 1; // Note: zero based!
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            int hour = now.get(Calendar.HOUR_OF_DAY);
+            int minute = now.get(Calendar.MINUTE);
+            int second = now.get(Calendar.SECOND);
+
+            final String s = ""+year+""+month+""+day+""+hour+""+minute+""+second;
+            //final String s = ""+hour+"-"+minute+""+second+""+day+""+month+""+year;
+            final Long id = Long.parseLong(s);
+
+            if(!MainActivity.notstarted) {
+                final String o, m, e;
+                o = MainActivity.org_msg;
+                m = MainActivity.mod_msg;
+                e = MainActivity.encription_path;
+
+
+                edbhelper helper = new edbhelper(context);
+
+                SQLiteDatabase database = helper.getWritableDatabase();
+                helper.addhistory(id,currentDateTimeString,o,m,e,database);
+
+
+                database.close();
+
+                Log.d("ID TIME :",s);
+            }
+
+        }
     }
 }
