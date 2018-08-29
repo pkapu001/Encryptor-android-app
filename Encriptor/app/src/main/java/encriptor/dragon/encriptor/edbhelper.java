@@ -14,6 +14,7 @@ public class edbhelper extends SQLiteOpenHelper{
 
     public static final String database_name = "History";
     public static final int database_version = 1;
+    public static String s;
 
 
 
@@ -37,9 +38,10 @@ public class edbhelper extends SQLiteOpenHelper{
 
         long count = DatabaseUtils.queryNumEntries(db, Econtract.Econtract_entry.table_name);
 
-
-        final String s ="SELECT MIN("+ Econtract.Econtract_entry.id_h + ")\n" +
-                "FROM "+Econtract.Econtract_entry.table_name;
+        if(count != 0) {
+             s = "SELECT MIN(" + Econtract.Econtract_entry.id_h + ")\n" +
+                    "FROM " + Econtract.Econtract_entry.table_name;
+        }
         if(count >=10)
         {
             Cursor cursor = db.rawQuery(s,null);
@@ -51,7 +53,7 @@ public class edbhelper extends SQLiteOpenHelper{
             }
 
         }
-        db.close();
+        //db.close();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(Econtract.Econtract_entry.id_h,id);
